@@ -7,11 +7,13 @@ namespace Ui {
 class StylesDialog;
 }
 
-struct FourColors {
+struct StyleColors {
     QColor firstColor;
     QColor secondColor;
     QColor thirdColor;
     QColor fourthColor;
+    QColor textOne;
+    QColor textTwo;
 };
 
 class StylesDialog : public QDialog
@@ -22,7 +24,7 @@ public:
     explicit StylesDialog(QWidget *parent = nullptr);
     ~StylesDialog();
 
-    void setAppStyle(const FourColors&);
+    void setAppStyle(const StyleColors&);
 
 private slots:
     void on_btnClose_clicked();
@@ -33,23 +35,42 @@ private slots:
 
 private:
     Ui::StylesDialog *ui;
+    QVector <QString> styleNames;
 };
 
 //colors
-const FourColors colorsArr [] =
+const StyleColors colorsArr [] =
 {
-   { {53, 53, 53},
-     {128, 128, 128},
-     {25, 25, 25},
-     {42, 130, 218}
-    }
+   { { 255, 255, 0 },
+     { 255, 255, 204 },
+     { 255, 255, 230 },
+     { 255, 255, 102 },
+     Qt::black,
+     Qt::white
+   },
+   { { 204, 255, 153 },
+     { 204, 255, 51 },
+     { 204, 255, 204 },
+     { 204, 204, 0 },
+     Qt::black,
+     Qt::white
+   },
 
+   { { 25, 26, 255 },
+     { 102, 102, 255 },
+     { 25, 25, 25 },
+     { 128, 128, 255 },
+      Qt::white,
+      Qt::black
+   },
+
+   { { 53, 53, 53 },
+     { 128, 128, 128 },
+     { 25, 25, 25 },
+     { 42, 130, 218 },
+      Qt::white,
+      Qt::black
+   }
 };
-/*
-   const QColor darkGray(53, 53, 53);
-   const QColor gray(128, 128, 128);
-   const QColor black(25, 25, 25);
-   const QColor blue(42, 130, 218);
-   */
 
 #endif // STYLESDIALOG_H

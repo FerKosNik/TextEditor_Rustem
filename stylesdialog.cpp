@@ -8,14 +8,10 @@ StylesDialog::StylesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    const QString styles [] = {
-        { tr("Morning") },
-        { tr("Day") },
-        { tr("Evening") },
-        { tr("Evening") },
-        { tr("Night") }
-
-    };
+    styleNames.push_back(QObject::tr("Morning"));
+    styleNames.push_back(QObject::tr("Day"));
+    styleNames.push_back(QObject::tr("Evening"));
+    styleNames.push_back(QObject::tr("Night"));
 
 }
 
@@ -33,17 +29,30 @@ void StylesDialog::on_btnClose_clicked()
     const auto checkedRadBtn { std::find_if(styleButtons.begin(), styleButtons.end(),
         [](const auto &radioButton){ return radioButton->isChecked(); }) };
 
-    qDebug() << (*checkedRadBtn)->text();
 
-    if ((*checkedRadBtn)->text() == "Summer")
+    StyleColors applyingColors{};
+
+    if ((*checkedRadBtn)->text() ==  styleNames.at(0))
     {
+        applyingColors = colorsArr[0];
     }
-    else
+
+    else if ((*checkedRadBtn)->text() == styleNames.at(1))
     {
-        QPalette lightPalette;
-        lightPalette.setColor(QPalette::Window, QColor(11,11,11));
-        qApp->setPalette(lightPalette);
+        applyingColors = colorsArr[1];
     }
+
+    else if ((*checkedRadBtn)->text() == styleNames.at(2))
+    {
+        applyingColors = colorsArr[3];
+    }
+
+    else if ((*checkedRadBtn)->text() == styleNames.at(3))
+    {
+        applyingColors = colorsArr[4];
+    }
+
+    setAppStyle(applyingColors);
 
    close();
 }
@@ -68,22 +77,22 @@ void StylesDialog::on_rbDarker_clicked()
 
 }
 
-void StylesDialog::setAppStyle(const FourColors &colorStyle)
+void StylesDialog::setAppStyle(const StyleColors &colorStyle)
 {
         QPalette palette;
 
         palette.setColor(QPalette::Window, colorStyle.firstColor);
-        palette.setColor(QPalette::WindowText, Qt::white);
+        palette.setColor(QPalette::WindowText, colorStyle.textOne);
         palette.setColor(QPalette::Base, colorStyle.thirdColor);
         palette.setColor(QPalette::AlternateBase, colorStyle.firstColor);
         palette.setColor(QPalette::ToolTipBase, colorStyle.fourthColor);
-        palette.setColor(QPalette::ToolTipText, Qt::white);
-        palette.setColor(QPalette::Text, Qt::white);
+        palette.setColor(QPalette::ToolTipText, colorStyle.textOne);
+        palette.setColor(QPalette::Text, colorStyle.textOne);
         palette.setColor(QPalette::Button, colorStyle.firstColor);
-        palette.setColor(QPalette::ButtonText, Qt::white);
+        palette.setColor(QPalette::ButtonText, colorStyle.textOne);
         palette.setColor(QPalette::Link, colorStyle.fourthColor);
         palette.setColor(QPalette::Highlight, colorStyle.fourthColor);
-        palette.setColor(QPalette::HighlightedText, Qt::black);
+        palette.setColor(QPalette::HighlightedText, colorStyle.textTwo);
 
         palette.setColor(QPalette::Active, QPalette::Button, colorStyle.secondColor.darker());
         palette.setColor(QPalette::Disabled, QPalette::ButtonText, colorStyle.secondColor);
@@ -92,5 +101,4 @@ void StylesDialog::setAppStyle(const FourColors &colorStyle)
         palette.setColor(QPalette::Disabled, QPalette::Light, colorStyle.firstColor);
 
         qApp->setPalette(palette);
-
 }
