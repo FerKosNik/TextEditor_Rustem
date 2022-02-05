@@ -50,7 +50,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Morning</string>
+      <string>Утро</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="rbDay">
@@ -63,7 +63,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Day</string>
+      <string>День</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="rbEvening">
@@ -76,7 +76,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Evening</string>
+      <string>Вечер</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="rbNight">
@@ -89,7 +89,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Night</string>
+      <string>Ночь</string>
      </property>
     </widget>
    </widget>
@@ -110,12 +110,12 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>81</width>
+       <width>91</width>
        <height>24</height>
       </rect>
      </property>
      <property name="text">
-      <string>Lighter</string>
+      <string>Светлая</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -131,7 +131,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Darker</string>
+      <string>Тёмная</string>
      </property>
     </widget>
    </widget>
