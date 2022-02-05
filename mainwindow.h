@@ -63,6 +63,8 @@ private:
 
     QTranslator *translator;
 
+    StyleColors currentColorTheme;
+
 protected:
     void keyReleaseEvent(QKeyEvent*) override;
 

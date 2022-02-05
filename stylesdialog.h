@@ -2,11 +2,13 @@
 #define STYLESDIALOG_H
 
 #include <QDialog>
+#include "main.h"
 
 namespace Ui {
 class StylesDialog;
 }
 
+/*
 struct StyleColors {
     QColor firstColor;
     QColor secondColor;
@@ -15,6 +17,7 @@ struct StyleColors {
     QColor textOne;
     QColor textTwo;
 };
+*/
 
 class StylesDialog : public QDialog
 {
@@ -22,6 +25,7 @@ class StylesDialog : public QDialog
 
 public:
     explicit StylesDialog(QWidget *parent = nullptr);
+    explicit StylesDialog(StyleColors*);
     ~StylesDialog();
 
     void setAppStyle(const StyleColors&);
@@ -36,9 +40,11 @@ private slots:
 private:
     Ui::StylesDialog *ui;
     QVector <QString> styleNames;
+    void initInterface();
+    StyleColors *currentColors;
 };
 
-//colors
+/*
 const StyleColors colorsArr [] =
 {
    { { 255, 255, 0 },
@@ -72,5 +78,6 @@ const StyleColors colorsArr [] =
       Qt::black
    }
 };
+*/
 
 #endif // STYLESDIALOG_H

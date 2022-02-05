@@ -15,7 +15,18 @@ MainWindow::MainWindow(QWidget *parent)
       file(new QFile()), canSave(true),
       isModified(false),
       translator{new QTranslator()}
+      //currentColorTheme { &colorsArr[3] }
 {
+
+      //currentColorTheme = &colorsArr[3];
+    currentColorTheme.firstColor = colorsArr[3].firstColor;
+    currentColorTheme.secondColor = colorsArr[3].secondColor;
+    currentColorTheme.thirdColor = colorsArr[3].thirdColor;
+    currentColorTheme.fourthColor = colorsArr[3].fourthColor;
+    currentColorTheme.textOne = colorsArr[3].textOne;
+    currentColorTheme.textTwo = colorsArr[3].textTwo;
+
+
     //Warning: Do not change the order of pushing elements. It corresponds
     //vector 'actionsIndexes' (see keybinddialog.h). To avoid mismatches the
     //vector 'keys' has to be initialized from vector 'actionsIndexes' somehow.
@@ -51,6 +62,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionKey_bindings->setText(tr("Сочетания клавиш"));
 
     ui->actionHelp->setText(tr("Помощь"));
+
+    //StylesDialog::setAppStyle (currentColorTheme);
+    StylesDialog initTheme;
+    initTheme.setAppStyle(currentColorTheme);
 
 }
 
@@ -409,7 +424,7 @@ void MainWindow::on_plainTextEdit_textChanged()
 
 void MainWindow::on_actionChange_style_triggered()
 {
-    StylesDialog dialog;
+    StylesDialog dialog(&currentColorTheme);
 
     dialog.setModal(true);
     dialog.exec();

@@ -4,14 +4,25 @@
 
 StylesDialog::StylesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::StylesDialog)
+    ui(new Ui::StylesDialog),
+    currentColors { nullptr}
 {
     ui->setupUi(this);
+}
+
+StylesDialog::StylesDialog(StyleColors *inColors):
+    StylesDialog()
+
+{
+
+    currentColors = inColors;
 
     styleNames.push_back(QObject::tr("Morning"));
     styleNames.push_back(QObject::tr("Day"));
     styleNames.push_back(QObject::tr("Evening"));
     styleNames.push_back(QObject::tr("Night"));
+
+    initInterface();
 
 }
 
@@ -23,7 +34,6 @@ StylesDialog::~StylesDialog()
 void StylesDialog::on_btnClose_clicked()
 {
 
-    //auto palette = QApplication::palette();
     QList<QRadioButton*> styleButtons = ui->groupBoxStyle->findChildren<QRadioButton*>();
     qDebug () << styleButtons.size();
 
@@ -102,4 +112,38 @@ void StylesDialog::setAppStyle(const StyleColors &colorStyle)
         palette.setColor(QPalette::Disabled, QPalette::Light, colorStyle.firstColor);
 
         qApp->setPalette(palette);
+}
+
+void StylesDialog::initInterface()
+{
+    if (*currentColors == colorsArr[0] || *currentColors == colorsArr[1])
+    {
+        qDebug() << "light";
+        on_rbLighter_clicked();
+        ui->rbLighter->setChecked(true);
+
+        if (*currentColors == colorsArr[0])
+            ui->rbMorning->setChecked(true);
+        else
+            ui->rbDay->setChecked(true);
+    }
+    else if (*currentColors == colorsArr[2] || *currentColors == colorsArr[3])
+    {
+        qDebug() <<"dark";
+        on_rbDarker_clicked();
+        ui->rbDarker->setChecked(true);
+
+        if (*currentColors == colorsArr[2])
+            ui->rbEvening->setChecked(true);
+        else
+            ui->rbNight->setChecked(true);
+    }
+    else
+    {
+        on_rbDarker_clicked();
+        ui->rbDarker->setChecked(true);
+        ui->rbEvening->setChecked(true);
+    }
+
+
 }
