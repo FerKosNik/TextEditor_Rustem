@@ -17,10 +17,11 @@ StylesDialog::StylesDialog(const StyleColors &inColors):
 
     currentColors = inColors;
 
-    styleNames.push_back(QObject::tr("Morning"));
-    styleNames.push_back(QObject::tr("Day"));
-    styleNames.push_back(QObject::tr("Evening"));
-    styleNames.push_back(QObject::tr("Night"));
+
+    styleNames.push_back(QObject::tr("Утро"));
+    styleNames.push_back(QObject::tr("День"));
+    styleNames.push_back(QObject::tr("Вечер"));
+    styleNames.push_back(QObject::tr("Ночь"));
 
     initInterface();
 
@@ -62,7 +63,7 @@ void StylesDialog::on_btnClose_clicked()
         currentColors = colorsArr[3];
     }
     else //this will never happens
-        currentColors = colorsArr[2]; //default app style
+        currentColors = colorsArr[3]; //default app style
 
     setAppStyle(currentColors);
 

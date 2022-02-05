@@ -15,10 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
       file(new QFile()), canSave(true),
       isModified(false),
       translator{new QTranslator()}
-      //currentColorTheme { &colorsArr[3] }
 {
 
-      //currentColorTheme = &colorsArr[3];
     currentColorTheme.firstColor = colorsArr[3].firstColor;
     currentColorTheme.secondColor = colorsArr[3].secondColor;
     currentColorTheme.thirdColor = colorsArr[3].thirdColor;
@@ -26,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     currentColorTheme.textOne = colorsArr[3].textOne;
     currentColorTheme.textTwo = colorsArr[3].textTwo;
 
-    qDebug() << currentColorTheme.firstColor;
 
 
     //Warning: Do not change the order of pushing elements. It corresponds
@@ -45,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
 
-    setWindowTitle(tr("Домашняя работа №4"));
+    setWindowTitle(tr("Текстовый редактор"));
 
     ui->menuFile->setTitle(tr("Файл"));
     ui->actionOpen->setText(tr("Открыть"));
@@ -62,10 +59,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionEnglish->setText(tr("Английский"));
 
     ui->actionKey_bindings->setText(tr("Сочетания клавиш"));
+    ui->actionChange_style->setText(tr("Сменить стиль"));
 
     ui->actionHelp->setText(tr("Помощь"));
 
-    //StylesDialog::setAppStyle (currentColorTheme);
     StylesDialog initTheme;
     initTheme.setAppStyle(currentColorTheme);
 
@@ -410,7 +407,7 @@ void MainWindow::on_actionKey_bindings_triggered()
     KeyBindDialog dialog(&keys);
 
     dialog.setModal(true);
-//    dialog.updateInterface(0);
+    //
     dialog.exec();
 
     keys[dialog.getNewBinding().second] = dialog.getNewBinding().first;
@@ -432,7 +429,5 @@ void MainWindow::on_actionChange_style_triggered()
     dialog.exec();
 
     currentColorTheme = dialog.getCurrentTheme();
-    qDebug() << currentColorTheme.firstColor;
-
 }
 

@@ -3,7 +3,6 @@
 
 #include <QTranslator>
 #include <QVector>
-#include <QDebug>
 
 struct KeyBind {
     Qt::KeyboardModifier mod1;
@@ -59,6 +58,7 @@ const StyleColors colorsArr [] =
       Qt::black
    },
 
+    //dark default
    { { 53, 53, 53 },
      { 128, 128, 128 },
      { 25, 25, 25 },
