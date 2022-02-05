@@ -41,31 +41,30 @@ void StylesDialog::on_btnClose_clicked()
         [](const auto &radioButton){ return radioButton->isChecked(); }) };
 
 
-    StyleColors applyingColors{};
 
     if ((*checkedRadBtn)->text() ==  styleNames.at(0))
     {
-        applyingColors = colorsArr[0];
+        currentColors = colorsArr[0];
     }
 
     else if ((*checkedRadBtn)->text() == styleNames.at(1))
     {
-        applyingColors = colorsArr[1];
+        currentColors = colorsArr[1];
     }
 
     else if ((*checkedRadBtn)->text() == styleNames.at(2))
     {
-        applyingColors = colorsArr[2];
+        currentColors = colorsArr[2];
     }
 
     else if ((*checkedRadBtn)->text() == styleNames.at(3))
     {
-        applyingColors = colorsArr[3];
+        currentColors = colorsArr[3];
     }
     else //this will never happens
-        applyingColors = colorsArr[2]; //default app style
+        currentColors = colorsArr[2]; //default app style
 
-    setAppStyle(applyingColors);
+    setAppStyle(currentColors);
 
    close();
 }

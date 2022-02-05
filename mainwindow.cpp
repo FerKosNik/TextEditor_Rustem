@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
     currentColorTheme.textOne = colorsArr[3].textOne;
     currentColorTheme.textTwo = colorsArr[3].textTwo;
 
+    qDebug() << currentColorTheme.firstColor;
+
 
     //Warning: Do not change the order of pushing elements. It corresponds
     //vector 'actionsIndexes' (see keybinddialog.h). To avoid mismatches the
