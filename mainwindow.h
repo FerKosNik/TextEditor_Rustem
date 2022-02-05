@@ -47,6 +47,8 @@ private slots:
 
     void on_plainTextEdit_textChanged();
 
+    void on_actionChange_style_triggered();
+
 private:
     Ui::MainWindow *ui;
     QFile *file;

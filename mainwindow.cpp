@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "keybinddialog.h"
+#include <stylesdialog.h>
 
 const QString FILE_NOT_FOUND { QObject::tr("Файл не найден") };
 const QString TXT_FILE_ONLY { QObject::tr ("Текстовый файл(*.txt)") };
@@ -403,5 +404,14 @@ void MainWindow::on_actionKey_bindings_triggered()
 void MainWindow::on_plainTextEdit_textChanged()
 {
       isModified = true;
+}
+
+
+void MainWindow::on_actionChange_style_triggered()
+{
+    StylesDialog dialog;
+
+    dialog.setModal(true);
+    dialog.exec();
 }
 

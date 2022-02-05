@@ -14,16 +14,19 @@ CONFIG += c++11
 SOURCES += \
     keybinddialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    stylesdialog.cpp
 
 HEADERS += \
     keybinddialog.h \
     main.h \
-    mainwindow.h
+    mainwindow.h \
+    stylesdialog.h
 
 FORMS += \
     keybinddialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    stylesdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
