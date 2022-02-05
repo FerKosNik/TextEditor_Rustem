@@ -23,6 +23,7 @@ StylesDialog::~StylesDialog()
 void StylesDialog::on_btnClose_clicked()
 {
 
+    //auto palette = QApplication::palette();
     QList<QRadioButton*> styleButtons = ui->groupBoxStyle->findChildren<QRadioButton*>();
     qDebug () << styleButtons.size();
 
