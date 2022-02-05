@@ -68,28 +68,28 @@ void StylesDialog::on_rbDarker_clicked()
 
 }
 
-void StylesDialog::setAppStyle(const QString &style)
+void StylesDialog::setAppStyle(const FourColors &colorStyle)
 {
         QPalette palette;
 
-        palette.setColor(QPalette::Window, darkGray);
+        palette.setColor(QPalette::Window, colorStyle.firstColor);
         palette.setColor(QPalette::WindowText, Qt::white);
-        palette.setColor(QPalette::Base, black);
-        palette.setColor(QPalette::AlternateBase, darkGray);
-        palette.setColor(QPalette::ToolTipBase, blue);
+        palette.setColor(QPalette::Base, colorStyle.thirdColor);
+        palette.setColor(QPalette::AlternateBase, colorStyle.firstColor);
+        palette.setColor(QPalette::ToolTipBase, colorStyle.fourthColor);
         palette.setColor(QPalette::ToolTipText, Qt::white);
         palette.setColor(QPalette::Text, Qt::white);
-        palette.setColor(QPalette::Button, darkGray);
+        palette.setColor(QPalette::Button, colorStyle.firstColor);
         palette.setColor(QPalette::ButtonText, Qt::white);
-        palette.setColor(QPalette::Link, blue);
-        palette.setColor(QPalette::Highlight, blue);
+        palette.setColor(QPalette::Link, colorStyle.fourthColor);
+        palette.setColor(QPalette::Highlight, colorStyle.fourthColor);
         palette.setColor(QPalette::HighlightedText, Qt::black);
 
-        palette.setColor(QPalette::Active, QPalette::Button, gray.darker());
-        palette.setColor(QPalette::Disabled, QPalette::ButtonText, gray);
-        palette.setColor(QPalette::Disabled, QPalette::WindowText, gray);
-        palette.setColor(QPalette::Disabled, QPalette::Text, gray);
-        palette.setColor(QPalette::Disabled, QPalette::Light, darkGray);
+        palette.setColor(QPalette::Active, QPalette::Button, colorStyle.secondColor.darker());
+        palette.setColor(QPalette::Disabled, QPalette::ButtonText, colorStyle.secondColor);
+        palette.setColor(QPalette::Disabled, QPalette::WindowText, colorStyle.secondColor);
+        palette.setColor(QPalette::Disabled, QPalette::Text, colorStyle.secondColor);
+        palette.setColor(QPalette::Disabled, QPalette::Light, colorStyle.firstColor);
 
         qApp->setPalette(palette);
 
