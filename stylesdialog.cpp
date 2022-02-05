@@ -4,13 +4,13 @@
 
 StylesDialog::StylesDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::StylesDialog),
-    currentColors { nullptr}
+    ui(new Ui::StylesDialog)
+    //currentColors { nullptr}
 {
     ui->setupUi(this);
 }
 
-StylesDialog::StylesDialog(StyleColors *inColors):
+StylesDialog::StylesDialog(const StyleColors &inColors):
     StylesDialog()
 
 {
@@ -55,13 +55,15 @@ void StylesDialog::on_btnClose_clicked()
 
     else if ((*checkedRadBtn)->text() == styleNames.at(2))
     {
-        applyingColors = colorsArr[3];
+        applyingColors = colorsArr[2];
     }
 
     else if ((*checkedRadBtn)->text() == styleNames.at(3))
     {
-        applyingColors = colorsArr[4];
+        applyingColors = colorsArr[3];
     }
+    else //this will never happens
+        applyingColors = colorsArr[2]; //default app style
 
     setAppStyle(applyingColors);
 
@@ -116,34 +118,39 @@ void StylesDialog::setAppStyle(const StyleColors &colorStyle)
 
 void StylesDialog::initInterface()
 {
-    if (*currentColors == colorsArr[0] || *currentColors == colorsArr[1])
+    if (currentColors == colorsArr[0] || currentColors == colorsArr[1])
     {
         qDebug() << "light";
         on_rbLighter_clicked();
         ui->rbLighter->setChecked(true);
 
-        if (*currentColors == colorsArr[0])
+        if (currentColors == colorsArr[0])
             ui->rbMorning->setChecked(true);
         else
             ui->rbDay->setChecked(true);
     }
-    else if (*currentColors == colorsArr[2] || *currentColors == colorsArr[3])
+    else if (currentColors == colorsArr[2] || currentColors == colorsArr[3])
     {
         qDebug() <<"dark";
         on_rbDarker_clicked();
         ui->rbDarker->setChecked(true);
 
-        if (*currentColors == colorsArr[2])
+        if (currentColors == colorsArr[2])
             ui->rbEvening->setChecked(true);
         else
             ui->rbNight->setChecked(true);
     }
     else
     {
+        qDebug () << "hrre";
         on_rbDarker_clicked();
-        ui->rbDarker->setChecked(true);
-        ui->rbEvening->setChecked(true);
+        ui->rbNight->setChecked(true);
     }
 
+}
 
+const StyleColors &StylesDialog::getCurrentTheme()const
+{
+    qDebug () << currentColors.firstColor;
+    return currentColors;
 }

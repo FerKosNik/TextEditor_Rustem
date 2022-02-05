@@ -424,9 +424,13 @@ void MainWindow::on_plainTextEdit_textChanged()
 
 void MainWindow::on_actionChange_style_triggered()
 {
-    StylesDialog dialog(&currentColorTheme);
+    StylesDialog dialog(currentColorTheme);
 
     dialog.setModal(true);
     dialog.exec();
+
+    currentColorTheme = dialog.getCurrentTheme();
+    qDebug() << currentColorTheme.firstColor;
+
 }
 

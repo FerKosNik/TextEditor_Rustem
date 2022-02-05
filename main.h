@@ -3,6 +3,7 @@
 
 #include <QTranslator>
 #include <QVector>
+#include <QDebug>
 
 struct KeyBind {
     Qt::KeyboardModifier mod1;
