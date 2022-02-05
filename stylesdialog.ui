@@ -29,15 +29,18 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>30</y>
+      <y>100</y>
       <width>261</width>
       <height>131</height>
      </rect>
     </property>
     <property name="title">
-     <string>Choose style</string>
+     <string/>
     </property>
-    <widget class="QRadioButton" name="rbWinter">
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <widget class="QRadioButton" name="rbMorning">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -47,10 +50,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>Winter</string>
+      <string>Morning</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rbSpring">
+    <widget class="QRadioButton" name="rbDay">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -60,10 +63,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>Spring</string>
+      <string>Day</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rbSummer">
+    <widget class="QRadioButton" name="rbEvening">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -73,10 +76,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>Summer</string>
+      <string>Evening</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rbAutumn">
+    <widget class="QRadioButton" name="rbNight">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -86,7 +89,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Autumn</string>
+      <string>Night</string>
      </property>
     </widget>
    </widget>
@@ -94,7 +97,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
+      <y>40</y>
       <width>261</width>
       <height>61</height>
      </rect>
@@ -113,6 +116,9 @@
      </property>
      <property name="text">
       <string>Lighter</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="rbDarker">
