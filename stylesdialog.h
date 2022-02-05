@@ -15,6 +15,9 @@ public:
     explicit StylesDialog(QWidget *parent = nullptr);
     ~StylesDialog();
 
+private slots:
+    void on_btnClose_clicked();
+
 private:
     Ui::StylesDialog *ui;
 };

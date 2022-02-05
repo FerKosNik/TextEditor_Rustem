@@ -12,3 +12,9 @@ StylesDialog::~StylesDialog()
 {
     delete ui;
 }
+
+void StylesDialog::on_btnClose_clicked()
+{
+   close();
+}
+

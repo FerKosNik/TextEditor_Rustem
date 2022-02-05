@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>433</height>
+    <width>317</width>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,132 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>521</width>
-     <height>281</height>
+     <x>10</x>
+     <y>10</y>
+     <width>291</width>
+     <height>291</height>
     </rect>
    </property>
    <property name="title">
-    <string>Style settings</string>
+    <string>Style tables</string>
    </property>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>261</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Choose style</string>
+    </property>
+    <widget class="QRadioButton" name="rbWinter">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>118</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Winter</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rbSpring">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>101</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Spring</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rbSummer">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>101</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Summer</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rbAutumn">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>80</y>
+       <width>101</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Autumn</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>261</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QRadioButton" name="rbLighter">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>81</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Lighter</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="rbDarker">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>118</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Darker</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="btnClose">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>250</y>
+      <width>94</width>
+      <height>26</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
