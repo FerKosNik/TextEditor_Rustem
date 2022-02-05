@@ -22,6 +22,13 @@ void StylesDialog::on_btnClose_clicked()
     QList<QRadioButton*> styleButtons = ui->groupBoxStyle->findChildren<QRadioButton*>();
     qDebug () << styleButtons.size();
 
+    const auto checkedRadBtn {std::find_if(styleButtons.begin(), styleButtons.end(),
+        [](const auto &radioButton){ return radioButton->isChecked(); }) };
+
+    //qDebug() << *checkedRadBtn->text();
+    qDebug() << (*checkedRadBtn)->text();
+
+    /*
     for (const auto &elem: styleButtons)
     {
         if (elem->isChecked())
@@ -36,6 +43,6 @@ void StylesDialog::on_btnClose_clicked()
             break;
         }
     }
+    */
    close();
 }
-
