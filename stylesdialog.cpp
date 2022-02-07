@@ -1,6 +1,5 @@
 #include "stylesdialog.h"
 #include "ui_stylesdialog.h"
-#include <QDebug>
 
 StylesDialog::StylesDialog(QWidget *parent) :
     QDialog(parent),
@@ -36,7 +35,6 @@ void StylesDialog::on_btnClose_clicked()
 {
 
     QList<QRadioButton*> styleButtons = ui->groupBoxStyle->findChildren<QRadioButton*>();
-    qDebug () << styleButtons.size();
 
     const auto checkedRadBtn { std::find_if(styleButtons.begin(), styleButtons.end(),
         [](const auto &radioButton){ return radioButton->isChecked(); }) };
@@ -120,7 +118,6 @@ void StylesDialog::initInterface()
 {
     if (currentColors == colorsArr[0] || currentColors == colorsArr[1])
     {
-        qDebug() << "light";
         on_rbLighter_clicked();
         ui->rbLighter->setChecked(true);
 
@@ -131,7 +128,6 @@ void StylesDialog::initInterface()
     }
     else if (currentColors == colorsArr[2] || currentColors == colorsArr[3])
     {
-        qDebug() <<"dark";
         on_rbDarker_clicked();
         ui->rbDarker->setChecked(true);
 
@@ -142,7 +138,6 @@ void StylesDialog::initInterface()
     }
     else
     {
-        qDebug () << "hrre";
         on_rbDarker_clicked();
         ui->rbNight->setChecked(true);
     }
@@ -151,6 +146,6 @@ void StylesDialog::initInterface()
 
 const StyleColors &StylesDialog::getCurrentTheme()const
 {
-    qDebug () << currentColors.firstColor;
+//    qDebug () << currentColors.firstColor;
     return currentColors;
 }
