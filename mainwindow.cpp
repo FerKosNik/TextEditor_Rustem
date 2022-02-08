@@ -68,19 +68,16 @@ MainWindow::MainWindow(QWidget *parent)
     initTheme.setAppStyle(currentColorTheme);
 
     //Begin of 6-th homework
-    //Элементы меню до настоящего момента добавлял путём редактирования mainwindow.ui.
-    //Чтобы не ломать/переделываеть предыдущую конструкцию, оставлю имеющиеся элементы как
-    //есть, а уже новые, в соответствии с пунктом 1 задания ДЗ №6, буду создавать программно.
+    //Элементы меню в предыдущих ДЗ вплоть до настоящего момента добавлял путём
+    //редактирования mainwindow.ui. Чтобы не ломать/переделываеть предыдущую конструкцию,
+    //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
+    //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
-    actionPrint->setText(tr("Печать"));
-//    QMenu
-    //ui->menu->insertAction(ui->actionSave, actionPrint);
-    ui->menu->insertAction(ui->actionOpen, actionPrint);
-
-    //ui->menu->insertAction(ui->menu->actions().first(), actionPrint);
-//    connect(actionPrint, SIGNAL(triggered(bool), this, SLOT()));
-//    qDebug() << ui->actionSaveAs;
-
+    actionPrint->setText(tr("Печать")); //tr
+    ui->menuFile->insertSeparator(ui->menuFile->actions().last());
+    ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
+    ui->menuFile->insertSeparator(ui->menuFile->actions().last());
+    connect(actionPrint, SIGNAL(triggered(bool)), this, SLOT(on_actionPrint_triggered()));
 }
 
 MainWindow::~MainWindow()
@@ -446,3 +443,7 @@ void MainWindow::on_actionChange_style_triggered()
     currentColorTheme = dialog.getCurrentTheme();
 }
 
+void MainWindow::on_actionPrint_triggered()
+{
+    qDebug() << "here";
+}

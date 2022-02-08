@@ -44,10 +44,11 @@ private slots:
 
     void on_actionKey_bindings_triggered();
 
-
     void on_plainTextEdit_textChanged();
 
     void on_actionChange_style_triggered();
+
+    void on_actionPrint_triggered();
 
 private:
     Ui::MainWindow *ui;
