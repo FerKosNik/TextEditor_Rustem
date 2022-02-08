@@ -3,6 +3,7 @@
 #include "keybinddialog.h"
 #include <stylesdialog.h>
 
+
 const QString FILE_NOT_FOUND { QObject::tr("Файл не найден") };
 const QString TXT_FILE_ONLY { QObject::tr ("Текстовый файл(*.txt)") };
 const QString CHOOSE_FILE_TO_OPEN { QObject::tr("Выберите файл для открытия") };
@@ -65,6 +66,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     StylesDialog initTheme;
     initTheme.setAppStyle(currentColorTheme);
+
+    //Begin of 6-th homework
+    //Элементы меню до настоящего момента добавлял путём редактирования mainwindow.ui.
+    //Чтобы не ломать/переделываеть предыдущую конструкцию, оставлю имеющиеся элементы как
+    //есть, а уже новые, в соответствии с пунктом 1 задания ДЗ №6, буду создавать программно.
+    QAction *actionPrint = new QAction(this);
+    actionPrint->setText(tr("Печать"));
+//    QMenu
+    //ui->menu->insertAction(ui->actionSave, actionPrint);
+    ui->menu->insertAction(ui->actionOpen, actionPrint);
+
+    //ui->menu->insertAction(ui->menu->actions().first(), actionPrint);
+//    connect(actionPrint, SIGNAL(triggered(bool), this, SLOT()));
+//    qDebug() << ui->actionSaveAs;
 
 }
 
