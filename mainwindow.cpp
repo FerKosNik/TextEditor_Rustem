@@ -448,7 +448,6 @@ void MainWindow::on_actionChange_style_triggered()
 
 void MainWindow::on_actionPrint_triggered()
 {
-//    qDebug() << "here";
 
     QPrinter printer;
     QPrintDialog dlg(&printer, this);
@@ -463,8 +462,8 @@ void MainWindow::on_actionPrint_triggered()
     int line = 0, cursor = 0;
     for (bool getst = true;getst;)
     {
-        int index = printStr.indexOf("\n", cursor); // Ищем перевод каретки
-                                                    // на новую строку
+        int index = printStr.indexOf("\n", cursor);
+
         QString s = "";
         if (index == -1)
         {
@@ -475,10 +474,10 @@ void MainWindow::on_actionPrint_triggered()
         cursor = index + 1;
         strlst << s;
     }
-    /// prints Ok.
-    QPainter painter;
+
+   QPainter painter;
    painter.begin(&printer);
-//   int w = painter.window().width();
+   int w = painter.window().width();
    int h = painter.window().height();
    int amount = strlst.count();
    QFont font = painter.font();
