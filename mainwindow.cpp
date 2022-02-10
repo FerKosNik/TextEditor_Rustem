@@ -5,13 +5,17 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>
+#include <QToolBar>
 
 
+/*
 const QString FILE_NOT_FOUND { QObject::tr("Файл не найден") };
 const QString TXT_FILE_ONLY { QObject::tr ("Текстовый файл(*.txt)") };
 const QString CHOOSE_FILE_TO_OPEN { QObject::tr("Выберите файл для открытия") };
 const QString CANT_OPEN_FILE { QObject::tr("Не могу открыть файл ") };
 const QString FILE_SPACE { QObject::tr("Файл ") };
+const QString PRINT { QObject::tr("Печать") };
+*/
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -70,17 +74,27 @@ MainWindow::MainWindow(QWidget *parent)
     StylesDialog initTheme;
     initTheme.setAppStyle(currentColorTheme);
 
-    //Begin of 6-th homework
     //Элементы меню в предыдущих ДЗ вплоть до настоящего момента добавлял путём
     //редактирования mainwindow.ui. Чтобы не ломать/переделываеть предыдущую конструкцию,
     //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
     //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
-    actionPrint->setText(tr("Печать")); //tr
+    actionPrint->setText(PRINT);
+
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
     ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
+
     connect(actionPrint, SIGNAL(triggered(bool)), this, SLOT(on_actionPrint_triggered()));
+
+    QToolBar *toolBar = new QToolBar(this);
+    this->addToolBar(toolBar);
+
+    auto tbPrintAction { new QAction{ QIcon { PRINTER_PIX }, PRINT, this } };
+    connect (tbPrintAction, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
+
+    toolBar->addAction(tbPrintAction);
+
 }
 
 MainWindow::~MainWindow()
@@ -451,7 +465,7 @@ void MainWindow::on_actionPrint_triggered()
 
     QPrinter printer;
     QPrintDialog dlg(&printer, this);
-    dlg.setWindowTitle("Print"); //tr
+    dlg.setWindowTitle(PRINT);
     if (dlg.exec() != QDialog::Accepted)
        return;
 

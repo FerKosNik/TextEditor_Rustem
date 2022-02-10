@@ -3,7 +3,7 @@
 
 #include <QTranslator>
 #include <QVector>
-#include <QDebug> //remove when project will be ready
+#include <QStringLiteral>
 
 struct KeyBind {
     Qt::KeyboardModifier mod1;
@@ -11,8 +11,21 @@ struct KeyBind {
     Qt::Key key;
 };
 
-const   QString langRus { "./QtLanguage_ru" };
-const   QString langEng { "./QtLanguage_en" };
+const   QString langRus { QStringLiteral ( "./QtLanguage_ru" ) };
+const   QString langEng { QStringLiteral ( "./QtLanguage_en" ) };
+
+const QString RESOURCE_FILE
+    { QStringLiteral("../TextEditor/resources.rcc") };
+
+const QPixmap PRINTER_PIX { ":/printer.png" };
+
+const QString FILE_NOT_FOUND { QStringLiteral ( QObject::tr("Файл не найден") ) };
+const QString TXT_FILE_ONLY { QStringLiteral ( QObject::tr ("Текстовый файл(*.txt)") ) };
+const QString CHOOSE_FILE_TO_OPEN { QStringLiteral ( QObject::tr("Выберите файл для открытия") ) };
+const QString CANT_OPEN_FILE { QStringLiteral ( QObject::tr("Не могу открыть файл ") ) };
+const QString FILE_SPACE { QStringLiteral ( QObject::tr("Файл ") ) };
+const QString PRINT { QStringLiteral ( QObject::tr("Печать") ) };
+
 
 
 struct StyleColors {
