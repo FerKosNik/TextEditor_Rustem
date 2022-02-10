@@ -4,7 +4,6 @@
 StylesDialog::StylesDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StylesDialog)
-    //currentColors { nullptr}
 {
     ui->setupUi(this);
 }

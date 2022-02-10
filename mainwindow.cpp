@@ -8,15 +8,6 @@
 #include <QToolBar>
 
 
-/*
-const QString FILE_NOT_FOUND { QObject::tr("Файл не найден") };
-const QString TXT_FILE_ONLY { QObject::tr ("Текстовый файл(*.txt)") };
-const QString CHOOSE_FILE_TO_OPEN { QObject::tr("Выберите файл для открытия") };
-const QString CANT_OPEN_FILE { QObject::tr("Не могу открыть файл ") };
-const QString FILE_SPACE { QObject::tr("Файл ") };
-const QString PRINT { QObject::tr("Печать") };
-*/
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow),
