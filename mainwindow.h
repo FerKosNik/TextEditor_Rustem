@@ -51,7 +51,9 @@ private slots:
 
     void on_actionPrint_triggered();
 
-    void on_actionCopyFontFormat_triggered();
+    void on_actionCopyTxtFormat_triggered();
+
+    void on_actionApplyTxtFormat_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -69,10 +71,7 @@ private:
 
     StyleColors currentColorTheme;
 
-    QTextCharFormat *currentCopiedTxtFormat;
-    void updateCurrentCopiedTxtFormat();
-
-//    void copyFontFormat
+    QTextCharFormat currentCopiedTxtFormat;
 
 //signals:
 //    void linkActivated(QString);

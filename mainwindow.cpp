@@ -21,8 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
       file(new QFile()), canSave(true),
       isModified(false),
       translator{new QTranslator()},
-      currentCopiedTxtFormat(new QTextCharFormat())
-//      currentCopiedTxtFormat{ nullptr }
+      currentCopiedTxtFormat{}
 {
 
     currentColorTheme.firstColor = colorsArr[3].firstColor;
@@ -100,24 +99,21 @@ MainWindow::MainWindow(QWidget *parent)
     QMenu *menuEdit = new QMenu(this);
     menuEdit->setTitle("Edit");
     this->menuBar()->insertMenu(this->menuBar()->actions().at(1), menuEdit);
-    QAction *actionCopyFontFormat = new QAction(this);
-    actionCopyFontFormat->setText("Copy font format");
-    menuEdit->insertAction(nullptr, actionCopyFontFormat);
-    //connect(actionCopyFontFormat, SIGNAL(triggered()), this, SLOT([](){ qDebug () << "triggered"; }));
-    //connect(actionCopyFontFormat, &QAction::triggered, this,  []{ qDebug () << "triggered"; });
-    //connect(actionCopyFontFormat, &QAction::triggered, this,  []{ qDebug () << "triggered"; }); works
-    //connect(actionCopyFontFormat, &QAction::triggered, this,  updateCurrentCopiedTxtFormat());
-    connect(actionCopyFontFormat, SIGNAL(triggered()), this, SLOT(on_actionCopyFontFormat_triggered()));
-//    this->menuWidget()->insertAction(ui->menubar, actionEdit);
 
+    QAction *actionCopyTxtFormat = new QAction(this);
+    actionCopyTxtFormat->setText("Copy text format");
+    menuEdit->addAction(actionCopyTxtFormat);
+    connect(actionCopyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionCopyTxtFormat_triggered()));
 
+    QAction *actionApplyTxtFormat = new QAction(this);
+    actionApplyTxtFormat->setText("Apply text format");
+    menuEdit->insertAction(nullptr, actionApplyTxtFormat);
+    menuEdit->addAction(actionApplyTxtFormat);
+    connect(actionApplyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionApplyTxtFormat_triggered()));
 }
 
 MainWindow::~MainWindow()
 {
-    if (currentCopiedTxtFormat)
-        delete currentCopiedTxtFormat;
-
     if (translator)
         delete translator;
 
@@ -563,32 +559,24 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
     qDebug() << "released";
 }
 
-void MainWindow::on_actionCopyFontFormat_triggered()
+void MainWindow::on_actionCopyTxtFormat_triggered()
 {
-    //qDebug() << currentCopiedTxtFormat->font();
-//    ui->plainTextEdit->setFon
-    qDebug () << currentCopiedTxtFormat;
-    //currentCopiedTxtFormat-> = &(ui->plainTextEdit->textCursor().charFormat());
-//    memcpy(currentCopiedTxtFormat,  &(ui->plainTextEdit->textCursor().charFormat()), sizeof(QTextCharFormat));
- //   currentCopiedTxtFormat->QTextCharFormat(ui->plainTextEdit->textCursor().charFormat());
-    currentCopiedTxtFormat->setFont(ui->plainTextEdit->textCursor().charFormat().font());
-    currentCopiedTxtFormat->setForeground(ui->plainTextEdit->textCursor().charFormat().foreground());
+    if (ui->plainTextEdit->textCursor().isNull())
+        return;
+
+    qDebug () << currentCopiedTxtFormat.background();
+
+    currentCopiedTxtFormat = ui->plainTextEdit->textCursor().charFormat();
 
     qDebug () << currentCopiedTxtFormat;
     qDebug() << ui->plainTextEdit->textCursor().selectedText().length();
-    qDebug() << currentCopiedTxtFormat->font();
+    qDebug() << currentCopiedTxtFormat.font();
 }
 
-void MainWindow::updateCurrentCopiedTxtFormat()
+void MainWindow::on_actionApplyTxtFormat_triggered()
 {
-    /*
-     qDebug () << currentCopiedTxtFormat;
-    //currentCopiedTxtFormat-> = &(ui->plainTextEdit->textCursor().charFormat());
-//    memcpy(currentCopiedTxtFormat,  &(ui->plainTextEdit->textCursor().charFormat()), sizeof(QTextCharFormat));
- //   currentCopiedTxtFormat->QTextCharFormat(ui->plainTextEdit->textCursor().charFormat());
-    currentCopiedTxtFormat->setFont(ui->plainTextEdit->textCursor().charFormat().font());
-    currentCopiedTxtFormat->setForeground(ui->plainTextEdit->textCursor().charFormat().foreground());
-    qDebug () << currentCopiedTxtFormat;
-    */
+    if (!currentCopiedTxtFormat.isValid())
+        return;
 
+    ui->plainTextEdit->textCursor().setCharFormat(currentCopiedTxtFormat);
 }
