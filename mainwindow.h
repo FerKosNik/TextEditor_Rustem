@@ -54,6 +54,8 @@ private slots:
     void on_actionAlignTxtRight_triggered();
     void on_actionAlignTxtLeft_triggered();
 
+    void on_actionFontChange_triggered();
+
 private:
     Ui::MainWindow *ui;
     QFile *file;

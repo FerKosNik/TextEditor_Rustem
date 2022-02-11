@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QToolBar>
 #include <QKeyEvent>
+#include <QFontDialog>
 
 const QString FILE_NOT_FOUND {  QObject::tr("Файл не найден")  };
 const QString TXT_FILE_ONLY {  QObject::tr ("Текстовый файл(*.txt)" ) };
@@ -121,6 +122,13 @@ MainWindow::MainWindow(QWidget *parent)
     actionAlignTxtLeft->setText(QObject::tr("Выровнять текст по левому краю"));
     menuEdit->addAction(actionAlignTxtLeft);
     connect(actionAlignTxtLeft, SIGNAL(triggered()), this, SLOT(on_actionAlignTxtLeft_triggered()));
+
+    menuEdit->addSeparator();
+
+    QAction *actionFontChange = new QAction(this);
+    actionFontChange->setText(QObject::tr("Выбрать шрифт"));
+    menuEdit->addAction(actionFontChange);
+    connect(actionFontChange, SIGNAL(triggered()), this, SLOT(on_actionFontChange_triggered()));
 
 
 }
@@ -605,5 +613,22 @@ void MainWindow::on_actionAlignTxtLeft_triggered()
     QTextBlockFormat blockFormat;
     blockFormat.setAlignment(Qt::AlignLeft);
     ui->textEdit->textCursor().setBlockFormat(blockFormat);
+
+}
+
+void MainWindow::on_actionFontChange_triggered()
+{
+    QFont font = ui->textEdit->textCursor().charFormat().font();
+    QFontDialog fontDialog(font,this);
+
+    bool b[] = { true };
+    font = fontDialog.getFont(b);
+    if (b[0])
+
+       {
+           QTextCharFormat textCharFormat;
+           textCharFormat.setFont(font);
+           ui->textEdit->textCursor().setCharFormat(textCharFormat);
+       }
 
 }
