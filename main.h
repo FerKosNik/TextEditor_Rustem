@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QObject>
 #include <QStringLiteral>
+#include <QDebug> //
 
 struct KeyBind {
     Qt::KeyboardModifier mod1;

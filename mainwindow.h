@@ -7,6 +7,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include "main.h"
+#include <QTextCharFormat>
 
 
 QT_BEGIN_NAMESPACE
@@ -50,6 +51,8 @@ private slots:
 
     void on_actionPrint_triggered();
 
+    void on_actionCopyFontFormat_triggered();
+
 private:
     Ui::MainWindow *ui;
     QFile *file;
@@ -66,7 +69,12 @@ private:
 
     StyleColors currentColorTheme;
 
-signals:
+    QTextCharFormat *currentCopiedTxtFormat;
+    void updateCurrentCopiedTxtFormat();
+
+//    void copyFontFormat
+
+//signals:
 //    void linkActivated(QString);
     //https://stackoverflow.com/questions/33531632/how-to-catch-the-link-click-event-in-qplaintextedit/33585505
     //https://stackoverflow.com/questions/63090602/creating-a-context-menu-when-user-selects-text-inside-a-qmainwindow

@@ -20,7 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow),
       file(new QFile()), canSave(true),
       isModified(false),
-      translator{new QTranslator()}
+      translator{new QTranslator()},
+      currentCopiedTxtFormat(new QTextCharFormat())
+//      currentCopiedTxtFormat{ nullptr }
 {
 
     currentColorTheme.firstColor = colorsArr[3].firstColor;
@@ -83,7 +85,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
 
-    connect(actionPrint, SIGNAL(triggered(bool)), this, SLOT(on_actionPrint_triggered()));
+    //connect(actionPrint, SIGNAL(triggered(bool)), this, SLOT(on_actionPrint_triggered()));
+    connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
 
     QToolBar *toolBar = new QToolBar(this);
     this->addToolBar(toolBar);
@@ -93,14 +96,38 @@ MainWindow::MainWindow(QWidget *parent)
 
     toolBar->addAction(tbPrintAction);
 
+    ///Homework 7
+    QMenu *menuEdit = new QMenu(this);
+    menuEdit->setTitle("Edit");
+    this->menuBar()->insertMenu(this->menuBar()->actions().at(1), menuEdit);
+    QAction *actionCopyFontFormat = new QAction(this);
+    actionCopyFontFormat->setText("Copy font format");
+    menuEdit->insertAction(nullptr, actionCopyFontFormat);
+    //connect(actionCopyFontFormat, SIGNAL(triggered()), this, SLOT([](){ qDebug () << "triggered"; }));
+    //connect(actionCopyFontFormat, &QAction::triggered, this,  []{ qDebug () << "triggered"; });
+    //connect(actionCopyFontFormat, &QAction::triggered, this,  []{ qDebug () << "triggered"; }); works
+    //connect(actionCopyFontFormat, &QAction::triggered, this,  updateCurrentCopiedTxtFormat());
+    connect(actionCopyFontFormat, SIGNAL(triggered()), this, SLOT(on_actionCopyFontFormat_triggered()));
+//    this->menuWidget()->insertAction(ui->menubar, actionEdit);
+
+
 }
 
 MainWindow::~MainWindow()
 {
-    delete translator;
-    if (file->isOpen())
-        file->close();
-    delete file;
+    if (currentCopiedTxtFormat)
+        delete currentCopiedTxtFormat;
+
+    if (translator)
+        delete translator;
+
+    if (file)
+    {
+        if (file->isOpen())
+                file->close();
+
+        delete file;
+    }
 
     delete ui;
 }
@@ -518,6 +545,8 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
                                  QString();
     QPlainTextEdit::mousePressEvent(e);
     */
+
+    qDebug() << "pressed";
 }
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *e)
@@ -531,4 +560,35 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
 
     QPlainTextEdit::mouseReleaseEvent(e);
 */
+    qDebug() << "released";
+}
+
+void MainWindow::on_actionCopyFontFormat_triggered()
+{
+    //qDebug() << currentCopiedTxtFormat->font();
+//    ui->plainTextEdit->setFon
+    qDebug () << currentCopiedTxtFormat;
+    //currentCopiedTxtFormat-> = &(ui->plainTextEdit->textCursor().charFormat());
+//    memcpy(currentCopiedTxtFormat,  &(ui->plainTextEdit->textCursor().charFormat()), sizeof(QTextCharFormat));
+ //   currentCopiedTxtFormat->QTextCharFormat(ui->plainTextEdit->textCursor().charFormat());
+    currentCopiedTxtFormat->setFont(ui->plainTextEdit->textCursor().charFormat().font());
+    currentCopiedTxtFormat->setForeground(ui->plainTextEdit->textCursor().charFormat().foreground());
+
+    qDebug () << currentCopiedTxtFormat;
+    qDebug() << ui->plainTextEdit->textCursor().selectedText().length();
+    qDebug() << currentCopiedTxtFormat->font();
+}
+
+void MainWindow::updateCurrentCopiedTxtFormat()
+{
+    /*
+     qDebug () << currentCopiedTxtFormat;
+    //currentCopiedTxtFormat-> = &(ui->plainTextEdit->textCursor().charFormat());
+//    memcpy(currentCopiedTxtFormat,  &(ui->plainTextEdit->textCursor().charFormat()), sizeof(QTextCharFormat));
+ //   currentCopiedTxtFormat->QTextCharFormat(ui->plainTextEdit->textCursor().charFormat());
+    currentCopiedTxtFormat->setFont(ui->plainTextEdit->textCursor().charFormat().font());
+    currentCopiedTxtFormat->setForeground(ui->plainTextEdit->textCursor().charFormat().foreground());
+    qDebug () << currentCopiedTxtFormat;
+    */
+
 }
