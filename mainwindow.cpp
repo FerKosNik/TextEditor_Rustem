@@ -6,6 +6,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QToolBar>
+#include <QKeyEvent>
 
 const QString FILE_NOT_FOUND {  QObject::tr("Файл не найден")  };
 const QString TXT_FILE_ONLY {  QObject::tr ("Текстовый файл(*.txt)" ) };
@@ -106,7 +107,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     QAction *actionApplyTxtFormat = new QAction(this);
     actionApplyTxtFormat->setText(QObject::tr("Применить формат текста"));
-   // menuEdit->insertAction(nullptr, actionApplyTxtFormat);
     menuEdit->addAction(actionApplyTxtFormat);
     connect(actionApplyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionApplyTxtFormat_triggered()));
 
@@ -162,7 +162,7 @@ void MainWindow::on_actionOpen_triggered()
 
                  disableSave(false);
 
-                 ui->plainTextEdit->setPlainText(
+                 ui->textEdit->setPlainText(
                     stream.readAll());
 
                  ui->actionClose->setEnabled(true);
@@ -200,7 +200,7 @@ void MainWindow::on_actionOpen_read_only_mode_triggered()
              {
                  QTextStream stream(file);
 
-                 ui->plainTextEdit->setPlainText(
+                 ui->textEdit->setPlainText(
                     stream.readAll());
 
                  file->close();
@@ -230,7 +230,7 @@ void MainWindow::on_actionSave_triggered()
     {
         QTextStream stream(file);
         stream.seek(0);
-        stream << ui->plainTextEdit->toPlainText();
+        stream << ui->textEdit->toPlainText();
 
         ui->statusbar->showMessage(FILE_SPACE + file->fileName() +
             tr(" сохранён."));
@@ -264,7 +264,7 @@ void MainWindow::on_actionSaveAs_triggered()
          {
            QTextStream stream(file);
 
-           stream << ui->plainTextEdit->toPlainText();
+           stream << ui->textEdit->toPlainText();
 
            ui->statusbar->showMessage(tr("Файл сохранён как ") + file->fileName() + '.');
          }
@@ -322,7 +322,7 @@ void MainWindow::on_actionHelp_triggered()
 
     if (file->isOpen()) file->close();
 
-    ui->plainTextEdit->setPlainText(
+    ui->textEdit->setPlainText(
         tr("Текстовый редактор с возможностью переключения языка интерфейса."));
 
 
@@ -340,7 +340,7 @@ void MainWindow::on_actionClose_triggered()
 
    disableSave(false);
 
-   ui->plainTextEdit->clear();
+   ui->textEdit->clear();
 
    ui->actionClose->setEnabled(false);
 
@@ -478,7 +478,7 @@ void MainWindow::on_actionKey_bindings_triggered()
 
 }
 
-void MainWindow::on_plainTextEdit_textChanged()
+void MainWindow::on_textEdit_textChanged()
 {
       isModified = true;
 }
@@ -503,7 +503,7 @@ void MainWindow::on_actionPrint_triggered()
     if (dlg.exec() != QDialog::Accepted)
        return;
 
-    QString printStr = ui->plainTextEdit->toPlainText();
+    QString printStr = ui->textEdit->toPlainText();
 
     QChar *list = printStr.data();
     QStringList strlst;
@@ -552,7 +552,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e)
     /*
     clickedAnchor = (e->button() & Qt::LeftButton) ? anchorAt(e->pos()) :
                                  QString();
-    QPlainTextEdit::mousePressEvent(e);
+    QTextEdit::mousePressEvent(e);
     */
 
     qDebug() << "pressed";
@@ -567,17 +567,17 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *e)
         emit linkActivated(clickedAnchor);
     }
 
-    QPlainTextEdit::mouseReleaseEvent(e);
+    QTextEdit::mouseReleaseEvent(e);
 */
     qDebug() << "released";
 }
 
 void MainWindow::on_actionCopyTxtFormat_triggered()
 {
-    if (ui->plainTextEdit->textCursor().isNull())
+    if (ui->textEdit->textCursor().isNull())
         return;
 
-    currentCopiedTxtFormat = ui->plainTextEdit->textCursor().charFormat();
+    currentCopiedTxtFormat = ui->textEdit->textCursor().charFormat();
 }
 
 void MainWindow::on_actionApplyTxtFormat_triggered()
@@ -585,51 +585,25 @@ void MainWindow::on_actionApplyTxtFormat_triggered()
     if (!currentCopiedTxtFormat.isValid())
         return;
 
-    if (ui->plainTextEdit->textCursor().isNull())
+    if (ui->textEdit->textCursor().isNull())
         return;
 
-    ui->plainTextEdit->textCursor().setCharFormat(currentCopiedTxtFormat);
+    ui->textEdit->textCursor().setCharFormat(currentCopiedTxtFormat);
 }
 
 void MainWindow::on_actionAlignTxtRight_triggered()
 {
-    /*
-    if (ui->plainTextEdit->textCursor().isNull())
-        return;
-        */
-    qDebug () << "here";
-
-    QTextBlockFormat blockformat; blockformat.setAlignment(Qt::AlignRight);
-    currentCopiedTxtFormat.BlockFormat = blockformat.alignment();
-    ui->plainTextEdit->textCursor().setBlockFormat(currentCopiedTxtFormat.BlockFormat);
-
-    /*
-    QTextCursor cursor = ui->plainTextEdit->textCursor();
-    QTextBlockFormat textBlockFormat = cursor.blockFormat();
-    textBlockFormat.setAlignment(Qt::AlignRight);
-    cursor.mergeBlockFormat(textBlockFormat);
-    ui->plainTextEdit->setTextCursor(cursor);
-    */
-    /*
-    QTextBlockFormat blockformat; blockformat.setAlignment(Qt::AlignRight);
-    ui->plainTextEdit->textCursor().setBlockFormat(blockformat);
-    ui->plainTextEdit->textCursor().mergeBlockFormat(blockformat);
-    */
-
-    /*
-     QTextCursor cursor = ui->textEdit->textCursor();
-QTextBlockFormat textBlockFormat = cursor.blockFormat();
-textBlockFormat.setAlignment(Qt::AlignRight);//or another alignment
-cursor.mergeBlockFormat(textBlockFormat);
-ui->textEdit->setTextCursor(cursor);
-*/
+    QTextBlockFormat blockFormat;
+    blockFormat.setAlignment(Qt::AlignRight);
+    ui->textEdit->textCursor().setBlockFormat(blockFormat);
 
 
 }
 
 void MainWindow::on_actionAlignTxtLeft_triggered()
 {
-    if (ui->plainTextEdit->textCursor().isNull())
-        return;
+    QTextBlockFormat blockFormat;
+    blockFormat.setAlignment(Qt::AlignLeft);
+    ui->textEdit->textCursor().setBlockFormat(blockFormat);
 
 }
