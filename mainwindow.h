@@ -66,8 +66,17 @@ private:
 
     StyleColors currentColorTheme;
 
+signals:
+//    void linkActivated(QString);
+    //https://stackoverflow.com/questions/33531632/how-to-catch-the-link-click-event-in-qplaintextedit/33585505
+    //https://stackoverflow.com/questions/63090602/creating-a-context-menu-when-user-selects-text-inside-a-qmainwindow
+    //https://stackoverflow.com/questions/43820152/adding-event-to-the-context-menu-in-qplaintextedit
+
+
 protected:
     void keyReleaseEvent(QKeyEvent*) override;
+    void mousePressEvent(QMouseEvent*) override;
+    void mouseReleaseEvent(QMouseEvent*) override;
 
 };
 

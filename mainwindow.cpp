@@ -510,3 +510,25 @@ void MainWindow::on_actionPrint_triggered()
    }
    painter.end();
 }
+
+void MainWindow::mousePressEvent(QMouseEvent *e)
+{
+    /*
+    clickedAnchor = (e->button() & Qt::LeftButton) ? anchorAt(e->pos()) :
+                                 QString();
+    QPlainTextEdit::mousePressEvent(e);
+    */
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *e)
+{
+    /*
+    if (e->button() & Qt::LeftButton && !clickedAnchor.isEmpty() &&
+        anchorAt(e->pos()) == clickedAnchor)
+    {
+        emit linkActivated(clickedAnchor);
+    }
+
+    QPlainTextEdit::mouseReleaseEvent(e);
+*/
+}
