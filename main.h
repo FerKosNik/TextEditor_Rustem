@@ -3,10 +3,8 @@
 
 #include <QTranslator>
 #include <QVector>
-
 #include <QObject>
 #include <QStringLiteral>
-//#include <QPixmap>
 
 struct KeyBind {
     Qt::KeyboardModifier mod1;
@@ -22,12 +20,6 @@ const QString RESOURCE_FILE
 
 const QString PRINTER_PIX { QStringLiteral (":/printer.png") };
 
-const QString FILE_NOT_FOUND {  QObject::tr("Файл не найден")  };
-const QString TXT_FILE_ONLY {  QObject::tr ("Текстовый файл(*.txt)" ) };
-const QString CHOOSE_FILE_TO_OPEN {  QObject::tr("Выберите файл для открытия") };
-const QString CANT_OPEN_FILE {  QObject::tr("Не могу открыть файл ") };
-const QString FILE_SPACE {  QObject::tr("Файл ") };
-const QString PRINT { QObject::tr("Печать") };
 
 struct StyleColors {
     QColor firstColor;

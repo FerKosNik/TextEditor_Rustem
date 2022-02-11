@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
     QFile resFile { RESOURCE_FILE };
     if (!resFile.exists())
     {
-        QMessageBox::warning(nullptr, FILE_NOT_FOUND,
-            CANT_OPEN_FILE + RESOURCE_FILE);
+        QMessageBox::warning(nullptr, QObject::tr("Не найден ресурс"),
+            QObject::tr("Не обнаружер файл ресурсов ") + RESOURCE_FILE);
 
     return -1;
     }

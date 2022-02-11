@@ -7,6 +7,13 @@
 #include <QPainter>
 #include <QToolBar>
 
+const QString FILE_NOT_FOUND {  QObject::tr("Файл не найден")  };
+const QString TXT_FILE_ONLY {  QObject::tr ("Текстовый файл(*.txt)" ) };
+const QString CHOOSE_FILE_TO_OPEN {  QObject::tr("Выберите файл для открытия") };
+const QString CANT_OPEN_FILE {  QObject::tr("Не могу открыть файл ") };
+const QString FILE_SPACE {  QObject::tr("Файл ") };
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -70,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent)
     //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
     //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
-    actionPrint->setText(PRINT);
+    actionPrint->setText(QObject::tr("Печать"));
 
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
     ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
@@ -81,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
     QToolBar *toolBar = new QToolBar(this);
     this->addToolBar(toolBar);
 
-    auto tbPrintAction { new QAction{ QIcon { PRINTER_PIX }, PRINT, this } };
+    auto tbPrintAction { new QAction{ QIcon { PRINTER_PIX }, QObject::tr("Печать"), this } };
     connect (tbPrintAction, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
 
     toolBar->addAction(tbPrintAction);
@@ -456,7 +463,7 @@ void MainWindow::on_actionPrint_triggered()
 
     QPrinter printer;
     QPrintDialog dlg(&printer, this);
-    dlg.setWindowTitle(PRINT);
+    dlg.setWindowTitle(QObject::tr("Печать"));
     if (dlg.exec() != QDialog::Accepted)
        return;
 
