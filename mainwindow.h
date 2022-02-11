@@ -26,21 +26,18 @@ public:
 
 private slots:
     void on_actionOpen_triggered();
-
     void on_actionOpen_read_only_mode_triggered();
 
     void on_actionSaveAs_triggered();
+    void on_actionSave_triggered();
+
+    void on_actionClose_triggered();
 
     void on_actionExit_triggered();
 
     void on_actionHelp_triggered();
 
-    void on_actionSave_triggered();
-
-    void on_actionClose_triggered();
-
     void on_actionRussian_triggered();
-
     void on_actionEnglish_triggered();
 
     void on_actionKey_bindings_triggered();
@@ -52,8 +49,10 @@ private slots:
     void on_actionPrint_triggered();
 
     void on_actionCopyTxtFormat_triggered();
-
     void on_actionApplyTxtFormat_triggered();
+
+    void on_actionAlignTxtRight_triggered();
+    void on_actionAlignTxtLeft_triggered();
 
 private:
     Ui::MainWindow *ui;

@@ -84,7 +84,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
 
-    //connect(actionPrint, SIGNAL(triggered(bool)), this, SLOT(on_actionPrint_triggered()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
 
     QToolBar *toolBar = new QToolBar(this);
@@ -97,19 +96,33 @@ MainWindow::MainWindow(QWidget *parent)
 
     ///Homework 7
     QMenu *menuEdit = new QMenu(this);
-    menuEdit->setTitle("Edit");
+    menuEdit->setTitle(QObject::tr("Правка"));
     this->menuBar()->insertMenu(this->menuBar()->actions().at(1), menuEdit);
 
     QAction *actionCopyTxtFormat = new QAction(this);
-    actionCopyTxtFormat->setText("Copy text format");
+    actionCopyTxtFormat->setText(QObject::tr("Скопировать формат текста"));
     menuEdit->addAction(actionCopyTxtFormat);
     connect(actionCopyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionCopyTxtFormat_triggered()));
 
     QAction *actionApplyTxtFormat = new QAction(this);
-    actionApplyTxtFormat->setText("Apply text format");
-    menuEdit->insertAction(nullptr, actionApplyTxtFormat);
+    actionApplyTxtFormat->setText(QObject::tr("Применить формат текста"));
+   // menuEdit->insertAction(nullptr, actionApplyTxtFormat);
     menuEdit->addAction(actionApplyTxtFormat);
     connect(actionApplyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionApplyTxtFormat_triggered()));
+
+    menuEdit->addSeparator();
+
+    QAction *actionAlignTxtRight = new QAction(this);
+    actionAlignTxtRight->setText(QObject::tr("Выровнять текст по правому краю"));
+    menuEdit->addAction(actionAlignTxtRight);
+    connect(actionAlignTxtRight, SIGNAL(triggered()), this, SLOT(on_actionAlignTxtRight_triggered()));
+
+    QAction *actionAlignTxtLeft = new QAction(this);
+    actionAlignTxtLeft->setText(QObject::tr("Выровнять текст по левому краю"));
+    menuEdit->addAction(actionAlignTxtLeft);
+    connect(actionAlignTxtLeft, SIGNAL(triggered()), this, SLOT(on_actionAlignTxtLeft_triggered()));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -564,13 +577,7 @@ void MainWindow::on_actionCopyTxtFormat_triggered()
     if (ui->plainTextEdit->textCursor().isNull())
         return;
 
-    qDebug () << currentCopiedTxtFormat.background();
-
     currentCopiedTxtFormat = ui->plainTextEdit->textCursor().charFormat();
-
-    qDebug () << currentCopiedTxtFormat;
-    qDebug() << ui->plainTextEdit->textCursor().selectedText().length();
-    qDebug() << currentCopiedTxtFormat.font();
 }
 
 void MainWindow::on_actionApplyTxtFormat_triggered()
@@ -578,5 +585,51 @@ void MainWindow::on_actionApplyTxtFormat_triggered()
     if (!currentCopiedTxtFormat.isValid())
         return;
 
+    if (ui->plainTextEdit->textCursor().isNull())
+        return;
+
     ui->plainTextEdit->textCursor().setCharFormat(currentCopiedTxtFormat);
+}
+
+void MainWindow::on_actionAlignTxtRight_triggered()
+{
+    /*
+    if (ui->plainTextEdit->textCursor().isNull())
+        return;
+        */
+    qDebug () << "here";
+
+    QTextBlockFormat blockformat; blockformat.setAlignment(Qt::AlignRight);
+    currentCopiedTxtFormat.BlockFormat = blockformat.alignment();
+    ui->plainTextEdit->textCursor().setBlockFormat(currentCopiedTxtFormat.BlockFormat);
+
+    /*
+    QTextCursor cursor = ui->plainTextEdit->textCursor();
+    QTextBlockFormat textBlockFormat = cursor.blockFormat();
+    textBlockFormat.setAlignment(Qt::AlignRight);
+    cursor.mergeBlockFormat(textBlockFormat);
+    ui->plainTextEdit->setTextCursor(cursor);
+    */
+    /*
+    QTextBlockFormat blockformat; blockformat.setAlignment(Qt::AlignRight);
+    ui->plainTextEdit->textCursor().setBlockFormat(blockformat);
+    ui->plainTextEdit->textCursor().mergeBlockFormat(blockformat);
+    */
+
+    /*
+     QTextCursor cursor = ui->textEdit->textCursor();
+QTextBlockFormat textBlockFormat = cursor.blockFormat();
+textBlockFormat.setAlignment(Qt::AlignRight);//or another alignment
+cursor.mergeBlockFormat(textBlockFormat);
+ui->textEdit->setTextCursor(cursor);
+*/
+
+
+}
+
+void MainWindow::on_actionAlignTxtLeft_triggered()
+{
+    if (ui->plainTextEdit->textCursor().isNull())
+        return;
+
 }
