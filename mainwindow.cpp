@@ -80,7 +80,8 @@ MainWindow::MainWindow(QWidget *parent)
     //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
     //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
-    actionPrint->setText(QObject::tr("Печать"));
+    //actionPrint->setText(QObject::tr("Печать"));
+    actionPrint->setText(tr("Печать"));
 
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
     ui->menuFile->insertAction(ui->menuFile->actions().last(), actionPrint);
@@ -91,42 +92,42 @@ MainWindow::MainWindow(QWidget *parent)
     QToolBar *toolBar = new QToolBar(this);
     this->addToolBar(toolBar);
 
-    auto tbPrintAction { new QAction{ QIcon { PRINTER_PIX }, QObject::tr("Печать"), this } };
+    auto tbPrintAction { new QAction{ QIcon { PRINTER_PIX }, tr("Печать"), this } };
     connect (tbPrintAction, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
 
     toolBar->addAction(tbPrintAction);
 
     ///Homework 7
     QMenu *menuEdit = new QMenu(this);
-    menuEdit->setTitle(QObject::tr("Правка"));
+    menuEdit->setTitle(tr("Правка"));
     this->menuBar()->insertMenu(this->menuBar()->actions().at(1), menuEdit);
 
     QAction *actionCopyTxtFormat = new QAction(this);
-    actionCopyTxtFormat->setText(QObject::tr("Скопировать формат текста"));
+    actionCopyTxtFormat->setText(tr("Скопировать формат текста"));
     menuEdit->addAction(actionCopyTxtFormat);
     connect(actionCopyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionCopyTxtFormat_triggered()));
 
     QAction *actionApplyTxtFormat = new QAction(this);
-    actionApplyTxtFormat->setText(QObject::tr("Применить формат текста"));
+    actionApplyTxtFormat->setText(tr("Применить формат текста"));
     menuEdit->addAction(actionApplyTxtFormat);
     connect(actionApplyTxtFormat, SIGNAL(triggered()), this, SLOT(on_actionApplyTxtFormat_triggered()));
 
     menuEdit->addSeparator();
 
     QAction *actionAlignTxtRight = new QAction(this);
-    actionAlignTxtRight->setText(QObject::tr("Выровнять текст по правому краю"));
+    actionAlignTxtRight->setText(tr("Выровнять текст по правому краю"));
     menuEdit->addAction(actionAlignTxtRight);
     connect(actionAlignTxtRight, SIGNAL(triggered()), this, SLOT(on_actionAlignTxtRight_triggered()));
 
     QAction *actionAlignTxtLeft = new QAction(this);
-    actionAlignTxtLeft->setText(QObject::tr("Выровнять текст по левому краю"));
+    actionAlignTxtLeft->setText(tr("Выровнять текст по левому краю"));
     menuEdit->addAction(actionAlignTxtLeft);
     connect(actionAlignTxtLeft, SIGNAL(triggered()), this, SLOT(on_actionAlignTxtLeft_triggered()));
 
     menuEdit->addSeparator();
 
     QAction *actionFontChange = new QAction(this);
-    actionFontChange->setText(QObject::tr("Выбрать шрифт"));
+    actionFontChange->setText(tr("Выбрать шрифт"));
     menuEdit->addAction(actionFontChange);
     connect(actionFontChange, SIGNAL(triggered()), this, SLOT(on_actionFontChange_triggered()));
 
@@ -507,7 +508,7 @@ void MainWindow::on_actionPrint_triggered()
 
     QPrinter printer;
     QPrintDialog dlg(&printer, this);
-    dlg.setWindowTitle(QObject::tr("Печать"));
+    dlg.setWindowTitle(tr("Печать"));
     if (dlg.exec() != QDialog::Accepted)
        return;
 
@@ -553,31 +554,6 @@ void MainWindow::on_actionPrint_triggered()
 
    }
    painter.end();
-}
-
-void MainWindow::mousePressEvent(QMouseEvent *e)
-{
-    /*
-    clickedAnchor = (e->button() & Qt::LeftButton) ? anchorAt(e->pos()) :
-                                 QString();
-    QTextEdit::mousePressEvent(e);
-    */
-
-    qDebug() << "pressed";
-}
-
-void MainWindow::mouseReleaseEvent(QMouseEvent *e)
-{
-    /*
-    if (e->button() & Qt::LeftButton && !clickedAnchor.isEmpty() &&
-        anchorAt(e->pos()) == clickedAnchor)
-    {
-        emit linkActivated(clickedAnchor);
-    }
-
-    QTextEdit::mouseReleaseEvent(e);
-*/
-    qDebug() << "released";
 }
 
 void MainWindow::on_actionCopyTxtFormat_triggered()
