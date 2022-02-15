@@ -81,7 +81,6 @@ MainWindow::MainWindow(QWidget *parent)
     //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
     //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
-    //actionPrint->setText(QObject::tr("Печать"));
     actionPrint->setText(tr("Печать"));
 
     ui->menuFile->insertSeparator(ui->menuFile->actions().last());
@@ -98,7 +97,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     toolBar->addAction(tbPrintAction);
 
-    ///Homework 7
     QMenu *menuEdit = new QMenu(this);
     menuEdit->setTitle(tr("Правка"));
     this->menuBar()->insertMenu(this->menuBar()->actions().at(1), menuEdit);
@@ -135,7 +133,7 @@ MainWindow::MainWindow(QWidget *parent)
     menuEdit->addSeparator();
 
     QAction *actionInsertDateTime = new QAction(this);
-    actionInsertDateTime->setText(tr("Вставить текущее время"));
+    actionInsertDateTime->setText(tr("Вставить текущее время и дату"));
     menuEdit->addAction(actionInsertDateTime);
     connect(actionInsertDateTime, SIGNAL(triggered()), this, SLOT(on_actionInsertDateTime_triggered()));
 
