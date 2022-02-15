@@ -56,6 +56,8 @@ private slots:
 
     void on_actionFontChange_triggered();
 
+    void on_actionInsertDateTime_triggered();
+
 private:
     Ui::MainWindow *ui;
     QFile *file;

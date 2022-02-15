@@ -8,6 +8,7 @@
 #include <QToolBar>
 #include <QKeyEvent>
 #include <QFontDialog>
+#include <QDateTime>
 
 const QString FILE_NOT_FOUND {  QObject::tr("Файл не найден")  };
 const QString TXT_FILE_ONLY {  QObject::tr ("Текстовый файл(*.txt)" ) };
@@ -131,6 +132,12 @@ MainWindow::MainWindow(QWidget *parent)
     menuEdit->addAction(actionFontChange);
     connect(actionFontChange, SIGNAL(triggered()), this, SLOT(on_actionFontChange_triggered()));
 
+    menuEdit->addSeparator();
+
+    QAction *actionInsertDateTime = new QAction(this);
+    actionInsertDateTime->setText(tr("Вставить текущее время"));
+    menuEdit->addAction(actionInsertDateTime);
+    connect(actionInsertDateTime, SIGNAL(triggered()), this, SLOT(on_actionInsertDateTime_triggered()));
 
 }
 
@@ -607,4 +614,11 @@ void MainWindow::on_actionFontChange_triggered()
            ui->textEdit->textCursor().setCharFormat(textCharFormat);
        }
 
+}
+
+void MainWindow::on_actionInsertDateTime_triggered()
+{
+    QDateTime dateTime = QDateTime::currentDateTime();
+
+    ui->textEdit->textCursor().insertText(dateTime.toString("hh:mm dd.MM.yyyy"));
 }
