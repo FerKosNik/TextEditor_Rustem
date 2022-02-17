@@ -76,10 +76,6 @@ MainWindow::MainWindow(QWidget *parent)
     StylesDialog initTheme;
     initTheme.setAppStyle(currentColorTheme);
 
-    //Элементы меню в предыдущих ДЗ вплоть до настоящего момента добавлял путём
-    //редактирования mainwindow.ui. Чтобы не ломать/переделываеть предыдущую конструкцию,
-    //оставлю имеющиеся элементы как есть, а уже новые, в соответствии с пунктом 1
-    //задания ДЗ №6, буду создавать программно.
     QAction *actionPrint = new QAction(this);
     actionPrint->setText(tr("Печать"));
 

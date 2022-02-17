@@ -99,9 +99,6 @@ void KeyBindDialog::on_cbAction_activated(const QString /*&arg1*/)
     updateInterface(ui->cbAction->currentIndex());
 }
 
-//Заметка на будущее развитие: здесь нет проверок на затирание
-//других, уже имеющихся для других целей комбинаций как для
-//самой программы, так и для системы в целом.
 void KeyBindDialog::on_btnOk_clicked()
 {
 
