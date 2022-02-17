@@ -35,36 +35,20 @@ void StylesDialog::on_btnClose_clicked()
 
     QList<QRadioButton*> styleButtons = ui->groupBoxStyle->findChildren<QRadioButton*>();
 
+
     const auto checkedRadBtn { std::find_if(styleButtons.begin(), styleButtons.end(),
         [](const auto &radioButton){ return radioButton->isChecked(); }) };
 
-
-
-    if ((*checkedRadBtn)->text() ==  styleNames.at(0))
+    // https://github.com/v01z/TextEditor5/pull/1/files#r808688234
+    for (size_t i{}; i < 3; ++i)
     {
-        currentColors = colorsArr[0];
+        if((*checkedRadBtn)->text() == styleNames.at(i))
+            currentColors = colorsArr[i];
     }
-
-    else if ((*checkedRadBtn)->text() == styleNames.at(1))
-    {
-        currentColors = colorsArr[1];
-    }
-
-    else if ((*checkedRadBtn)->text() == styleNames.at(2))
-    {
-        currentColors = colorsArr[2];
-    }
-
-    else if ((*checkedRadBtn)->text() == styleNames.at(3))
-    {
-        currentColors = colorsArr[3];
-    }
-    else //this will never happens
-        currentColors = colorsArr[3]; //default app style
 
     setAppStyle(currentColors);
 
-   close();
+    close();
 }
 
 void StylesDialog::on_rbLighter_clicked()
